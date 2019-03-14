@@ -42,9 +42,9 @@ document.onkeyup = function(event) {
 
 for (var j = 0; j < destination.length; j++) {
     if (letterGuess.textContent === destination[j]) {
-        var newLocal = guessWord.replace(j, letterGuess.textContent);
-        $("#word").text(newLocal);
-        console.log(letterGuess.textcontent)
+        var displayWord = guessWord.replace(guessWord[j], letterGuess.textContent);
+        $("#word").text(displayWord);
+        console.log(displayWord);
     }
 
 }
