@@ -1,56 +1,83 @@
-//Create an array of colleges where the L-Train could be headed
+//Create an array of teams that will be taking on Tech
+$(document).ready(function () {
 
-var colleges = ["Boston College","Clemson","Florida State","Georgia Tech","Louisville",
-                "Miami","North Carolina State","North Carolina","Notre Dame","Pittsburgh",
-                "Syracuse","Virginia","Virginia Tech","Wake Forest"]
-
-//Create variables needed for game
-
-var guessRemaining = 5;
-var wins = 0;
-var losses = 0;
-var guessWord = destination
-var guessLog = [""]
+    var teams = ["Boston College", "Clemson", "Duke", "Florida State", "Louisville",
+        "Miami", "North Carolina State", "North Carolina", "Notre Dame", "Pittsburgh",
+        "Syracuse", "Virginia", "Virginia Tech", "Wake Forest"]
 
 
-//Choose a city from the array that is the L-Train's destination
-var destination = colleges[Math.floor(Math.random() * colleges.length)].toUpperCase();
+    //Create variables needed for the scoreboard
+    var wins = 0;
+    var losses = 0;
+    var guessRemain = 5;
+    var guessLog = [""]
 
-//Convert the destination into the string of blanks
+    //Choose a team from the array that will take on Tech
+    var opponent = teams[Math.floor(Math.random() * teams.length)].toUpperCase();
 
-for (var i = 0; i < destination.length; i++) {
+    //Create a word which converts the opponent name into a string of blanks to serve as the clue.  
+    var guessWord = opponent.replace(/[A-Z]/g, "_")
+    console.log("Guess Word: " + guessWord);
+    //Convert the opponent into an array of blanks
+   
+ 
+    //Display the string of blanks on the game board.
+    $("#word").text(guessWord);
+    console.log("Guess Word: " + guessWord);
 
-    if (destination.charAt(0) !== "a" ) {
-        var guessWord = destination.replace(/[A-Z]/g,"_");
+    //Ask the player to guess a letter in the opponent name.  Capture the letter guessed on the keyboard.
+    //Continue to ask the player to  guess letters until there are no more blanks or until the player
+
+    var letterGuess = document.getElementById("guess");
+
+    document.onkeyup = function (event) {
+        letterGuess.textContent = event.key.toUpperCase();
+        console.log("Letter Guess: " + letterGuess.textContent);
+
+    //Check to see if the letter guessed matches any of the letters in the blank team name.
+
+    function letterCheck(letter) {
+        var oppArray = guessWord.split("");
+        console.log("Opponent: " + opponent);
+        console.log("Opp Array: " + guessWord.split(""));
+        var teamArray = opponent.split("");
+        console.log("Team Array: " + teamArray);
+
+        for (var j = 0; j < oppArray.length; j++) {
+            if (letterGuess.textContent === teamArray[j]) {
+                console.log("teamArray:" + teamArray[j]);
+                console.log("oppArray: " + oppArray[j]);
+                // debugger;
+                oppArray[j] = letterGuess.textContent;
+                console.log("oppArray: " + oppArray[j])
+                console.log("oppArray.join: " + oppArray.join(""));
+                // tempArray = oppArray.join(" ")
+                // console.log("tempArray: " + tempArray[j]);
+                $("#word").text(oppArray.join(""));
+                // console.log("tempArray: " + tempArray[j]);
+            } else { 
+                for (var j = 0; j < oppArray.length; j++) {
+                    if (letterGuess.textContent !== teamArray[j]) {
+                    }
+                    guessRemain -= (1 - teamArray.length);
+                    $("#remaining").text("00:0" + guessRemain);
+                }
+
+                console.log("Guess Remain: " + guessRemain);
+            }
+        }
     }
-}
 
+    letterCheck(letterGuess.textContent);
+    
 
-
-//Display the blank word with the same number of characters as the destination city
-$(document).ready(function() {
-
-$("#word").text(guessWord);
-
-//Ask the player to guess a letter in the destination city.  Continue to ask the player to
-//guess letters until there are no more blanks or until the player misses 5 letters and the game is over
-
-var letterGuess = document.getElementById("guess");
-
-document.onkeyup = function(event) {
-    letterGuess.textContent = event.key.toUpperCase();
-
-for (var j = 0; j < destination.length; j++) {
-    if (letterGuess.textContent === destination[j]) {
-        var displayWord = guessWord.replace(guessWord[j], letterGuess.textContent);
-        $("#word").text(displayWord);
-        console.log(displayWord);
     }
+ 
 
-}
+  
 
-}
-});
+
+
 
 
 
@@ -75,4 +102,4 @@ for (var j = 0; j < destination.length; j++) {
 
 //If the destination city is completed, add a win to the win total and show the picture of the destination city in the bottom section show next word
 
-
+});

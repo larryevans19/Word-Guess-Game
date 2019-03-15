@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Where is the L-Train Headed?</title>
+    <title>GameDay Guess!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -26,9 +26,10 @@
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-3">Where is the L-TRAIN Headed?</h1>
-            <h4>The L-Train is going to college football games around the country.</h4>
-            <h4>Guess a letter to find out which school it's headed to next!</h4>
+            <h1 class="display-4" id="head">GEORGIA TECH GAMEDAY GUESS!</h1>
+            <h4>Every day is GameDay at Georgia Tech.  Figure out the school listed below that has come to take on the Jackets by guessing letters.
+                Uncover the opponent and it's TD for Tech!  Run out of guesses and the opponent scores a TD!</h4>
+            <h4>It's game time, so get guessing!</h4>
             <br>
         </div>
         <div class="game">
@@ -36,22 +37,26 @@
             <br>
 
             <div class="row">
-                <div class="col-3 scoreboard">
-                    <h3>WINS</h3>
-                    <h1 id="wins">0</h1>
+                <div class="col-2 scoreboard">
+                    <h3>TECH</h3>
+                    <h1 class="display-3" id="wins">0</h1>
                 </div>
-                <div class="col-3 scoreboard">
-                    <h3>LOSSES</h3>
-                    <h1 id="losses">0</h1>
+                <div class="col-2 scoreboard">
+                    <h3>OPPONENT</h3>
+                    <h1 class="display-3" id="losses">0</h1>
                 </div>
-                <div class="col-3 scoreboard">
+                <div class="col-2 scoreboard">
                     <h3>GUESSES REMAINING</h3>
-                    <h1 id="remaining">00:05</h1>
+                    <h1 class="display-3" id="remaining">00:05</h1>
                 </div>
-                <div class="col-3 scoreboard">
+                <div class="col-2 scoreboard">
+                    <h3>CURRENT GUESS</h3>
+                    <h2 class="display-3" id="guess"></h2>
+                </div>
+                <div class="col-4 scoreboard">
                     <h3>LETTERS GUESSED</h3>
-                    <h2 id="guess"></h2>
-                    <h4 id="used"></h4>
+                    <h2 id="guessList"></h2>
+                    <h4 id="usedList"></h4>
                 </div>
             </div>
         </div>
