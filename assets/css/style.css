@@ -7,11 +7,14 @@
 body {
     color: yellow;
     background-color: black;
+    text-align: center;
+    font-family: "scoreboard";
+    border: 10px solid yellow
 }
 
 #head {
-    font-weight: bold;
-    color: darkgoldenrod;
+    font-weight: bolder;
+
 }
 
 h1, h4 {
@@ -35,8 +38,8 @@ h4 {
 
 #word {
     text-align: center;
-    font-weight: bold;
-    letter-spacing: 1.0em;
+    font-weight: bolder;
+    letter-spacing: .75em;
 }
 
 br {
@@ -56,4 +59,17 @@ br {
 
 .game {
     margin: 0px 30px 0px 30px;
+}
+
+.display-2 {
+    font-weight: bolder;
+}
+
+#guessList {
+    font-weight: bolder;
+}
+
+#message {
+    font-size: 300px;
+    font-weight: bolder;
 }
