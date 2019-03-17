@@ -13,6 +13,7 @@ body {
 }
 
 #head {
+    font-size: 115px;
     font-weight: bolder;
 
 }
@@ -72,4 +73,17 @@ br {
 #message {
     font-size: 300px;
     font-weight: bolder;
+}
+
+#intro {
+    width: 100%;
+}
+
+#int-head {
+    font-size: 300px;
+    font-weight: bolder;
+}
+
+#key {
+    font-weight: bold;
 }
