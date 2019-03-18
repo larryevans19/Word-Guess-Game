@@ -25,7 +25,7 @@ $(document).ready(function () {
     var oppArray = [];
     var blanksLeft = 10
     var guessWord = "";
-    
+
     var letterGuess = document.getElementById("guess");
     var wasGuessed = false;
 
@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     var audioTech = document.createElement("audio");
     audioTech.setAttribute("src", "assets/GT.mp3");
-    
+
     var audioRef = document.createElement("audio");
     audioRef.setAttribute("src", "assets/ref.mp3");
 
@@ -77,26 +77,29 @@ $(document).ready(function () {
     //matched letters.  If all the letters are matched and the blanks counter reaches 0, the 
     //game gives Tech a touchdown on the scoreboard and calls the VICTORY function to end the
     //round.   
+
     function letterCheck(letter) {
 
         console.log("Opponent: " + opponent);
-        console.log("Opp Array: " + guessWord.split(""));
+        // console.log("Opp Array: " + guessWord.split(""));
 
         //This variable captures the letters in the Guess List that we will use
         //to see if a matched letter has already been played in the round.
         var g = $("#guessList").text();
 
-        console.log("GUESS VAL CHECK:",$("#guessList").text());
-        console.log("VAR G:",g);
-        console.log("G LENGTH:",g.length);
+        console.log("GUESS VAL CHECK:", $("#guessList").text());
+        console.log("VAR G:", g);
+        console.log("G LENGTH:", g.length);
         console.log("GUESS SEARCH CHECK:", g.search(letter));
 
         // var gSearch= g.search(letter)
         // console.log("GUESS SEARCH CHECK:",$("#guessList").search(letter));
         //Check to see if the guessed letter is NOT in the game word. 
         var y = opponent.indexOf(letter);
+        console.log("letter:", letter);
+        console.log("letter.keyCode:", event.keyCode)
         console.log("Index of letter: ", opponent.indexOf(letter));
-        if (y === -1) {
+        if ((y === -1) && (65 <= event.keyCode && event.keyCode <= 90)) {
             guessRemain--;
             if (guessRemain < 1) {
                 losses += 7;
@@ -115,15 +118,15 @@ $(document).ready(function () {
         for (var l = 0; l < opponent.length; l++) {
             if (letter === opponent[l]) {
                 oppArray[l] = letter;
-                console.log("oppArray Index:", oppArray[l])
+                // console.log("oppArray Index:", oppArray[l])
                 $("#word").text(oppArray.join(""));
-                console.log("GSEARCHLETTER,GLENGTH -3:",g.search(letter),", ",(g.length - 3));
+                console.log("G-SEARCH LETTER,G-LENGTH -3:", g.search(letter), ", ", (g.length - 3));
                 //This IF statement checks the Letters Guessed ID to see if a matched letter
                 //has already been guessed.  The Blanks Left counter is not reduced if a 
                 //matched letter was already guessed.  This keeps the player from winning
                 //too early by matching letters that were already matched.
                 if (g.search(letter) >= (g.length - 3)) {
-                blanksLeft--;
+                    blanksLeft--;
                 }
                 console.log("blanksLeft:", blanksLeft);
                 if (blanksLeft === 0) {
@@ -193,10 +196,10 @@ $(document).ready(function () {
         guessRemain = 5;
         $("#remaining").text("00:0" + guessRemain);
         opponent = teams[Math.floor(Math.random() * teams.length)].toUpperCase();
-        console.log("Opponent", opponent);
+        // console.log("Opponent", opponent);
         $("#guess, #guessList, #message, #continue").empty();
         //replace all letters with blanks (keep any spaces in game word)
-        guessWord = opponent.replace(/[A-Z]/g, "_"); 
+        guessWord = opponent.replace(/[A-Z]/g, "_");
         $("#word").text(guessWord);
         game();
     }
@@ -209,6 +212,16 @@ $(document).ready(function () {
             $(".intro").hide();
             $(".play").show();
             game();
+        }
+    }
+
+    //ISLETTER function takes the key event to determine if the player entered a number.
+    //If the player didn't enter a number, it blows the referee's whistle and throws a
+    //message to the jumbotron.
+    function isLetter(event) {
+        if (event.keyCode < 65 || event.keyCode > 90) {
+            audioRef.play();
+            $("#guessAlert").text("YOUR GUESS IS NOT A LETTER! CHOOSE A LETTER NOT SHOWN ABOVE")
         }
     }
 
@@ -226,30 +239,46 @@ $(document).ready(function () {
             var letterStr = String.fromCharCode(letterCode);
 
             //This variable captures the letters in the Guess List that we will use
-           //to see if a matched letter has already been played in the round.
+            //to see if a matched letter has already been played in the round.
             var d = $("#guessList").text();
 
-            console.log("Index Test", document.getElementById("guessList").valueOf(letter));
+            //Check to see if hte key event was a letter.  If  non-letter was entered, blows
+            //the referee's whistle.
 
-            //This IF statement only adds the key entry to the LETTERS GUESSED list on the
+            isLetter(event);
+
+            //This IF statement checks to see if the guessed letter has already been chosen by
+            //the Guess List. If the letter has already been guessed, an alert is posted on the
+            //scoreboard telling the player the letter has already been guessed and to pick a
+            //different letter.  It also blows the referees whistle to alert the player!
+
+            if ((d.search(letter) !== -1) && d.length >= 3) {
+                audioRef.play();
+                $("#guessAlert").text("ALREADY GUESSED! CHOOSE A LETTER NOT SHOWN ABOVE!")
+            }
+            console.log("D-SEARCH, D-LENGTH, D-LENGTH - 3:", d.search(letter), ", ", d.length, ", ", (d.length - 3));
+
+            //This IF statement only adds the key entry to the Guess Letter list on the
             //scoreboard and calls the LETTERCHECK function if the key entry by the
-            //player was a LETTER. So it won't penalize the player if they guess a number or
-            //key like spacebar, backspace, or shift.
-            
-            console.log("d Search, d Length, d Length - 3:",d.search(letter),", ",d.length,", ",(d.length - 3));
-            if ((d.search(letter) === -1) || (d.search(letter) >= (d.length - 3))) {
-               if (/[a-zA-Z]/i.test(letterStr)) {  
-               $("#guessList").append(letter, ", ");
-               console.log("guessList:", document.getElementById("guessList").valueOf());
-               console.log("Event Test: Letter typed")
-               letterCheck(letter);
+            //player was a LETTER. So the game won't penalize the player if they guess a number or
+            //other key like spacebar, backspace, or shift.
+            if ((d.search(letter) === -1) || (d.search(letter) >= (d.length - 2))) {
+                $("#guessAlert").empty();
+                if (/[a-zA-Z]/i.test(letterStr)) {
+                    $("#guessList").append(letter, ", ");
+                    console.log("Event Test:", (/[a-zA-Z]/i.test(letterStr)))
+                    console.log("letterStr:", letterStr)
                 }
+                letterCheck(letter);
             }
         }
     }
+
 
     //INTRO is the first function called in the game.  This is the game intro screen.
     //The game jumbotron screen is hidden in the base HTML.  The player's first key entry
     //hides the intro screen and shows the game screen to begin the action. 
     intro();
+
+
 });
