@@ -49,14 +49,14 @@ $(document).ready(function () {
     //accounts, which alos accounts for the fact that some opponent words are actually multiple
     //words with spaces (that was tricky!).
     function preGame() {
-        console.log("PREGAME!");
+        // console.log("PREGAME!");
         //Choose a team from the array that will take on Tech
         opponent = teams[Math.floor(Math.random() * teams.length)].toUpperCase();
-        console.log("Opponent", opponent);
+        // console.log("Opponent", opponent);
 
         //Create a word which converts the opponent name into a string of blanks to serve as the clue.  
         guessWord = opponent.replace(/[A-Z]/g, "_");
-        console.log("Guess Word: " + guessWord);
+        // console.log("Guess Word: " + guessWord);
 
         //Convert the opponent into an array of blanks
         oppArray = guessWord.split("");
@@ -80,17 +80,17 @@ $(document).ready(function () {
 
     function letterCheck(letter) {
 
-        console.log("Opponent: " + opponent);
+        // console.log("Opponent: " + opponent);
         // console.log("Opp Array: " + guessWord.split(""));
 
         //This variable captures the letters in the Guess List that we will use
         //to see if a matched letter has already been played in the round.
         var g = $("#guessList").text();
 
-        console.log("GUESS VAL CHECK:", $("#guessList").text());
-        console.log("VAR G:", g);
-        console.log("G LENGTH:", g.length);
-        console.log("GUESS SEARCH CHECK:", g.search(letter));
+        // console.log("GUESS VAL CHECK:", $("#guessList").text());
+        // console.log("VAR G:", g);
+        // console.log("G LENGTH:", g.length);
+        // console.log("GUESS SEARCH CHECK:", g.search(letter));
 
         // var gSearch= g.search(letter)
         // console.log("GUESS SEARCH CHECK:",$("#guessList").search(letter));
@@ -104,7 +104,7 @@ $(document).ready(function () {
             if (guessRemain < 1) {
                 losses += 7;
                 $("#losses").text(losses);
-                console.log("opponent:", opponent)
+                // console.log("opponent:", opponent)
                 defeat(opponent);
             }
             console.log(guessRemain);
@@ -120,8 +120,8 @@ $(document).ready(function () {
                 oppArray[l] = letter;
                 // console.log("oppArray Index:", oppArray[l])
                 $("#word").text(oppArray.join(""));
-                console.log("G-SEARCH LETTER,G-LENGTH -3:", g.search(letter), ", ", (g.length - 3));
-                //This IF statement checks the Letters Guessed ID to see if a matched letter
+                // console.log("G-SEARCH LETTER,G-LENGTH -3:", g.search(letter), ", ", (g.length - 3));
+                // //This IF statement checks the Letters Guessed ID to see if a matched letter
                 //has already been guessed.  The Blanks Left counter is not reduced if a 
                 //matched letter was already guessed.  This keeps the player from winning
                 //too early by matching letters that were already matched.
@@ -256,7 +256,7 @@ $(document).ready(function () {
                 audioRef.play();
                 $("#guessAlert").text("ALREADY GUESSED! CHOOSE A LETTER NOT SHOWN ABOVE!")
             }
-            console.log("D-SEARCH, D-LENGTH, D-LENGTH - 3:", d.search(letter), ", ", d.length, ", ", (d.length - 3));
+            // console.log("D-SEARCH, D-LENGTH, D-LENGTH - 3:", d.search(letter), ", ", d.length, ", ", (d.length - 3));
 
             //This IF statement only adds the key entry to the Guess Letter list on the
             //scoreboard and calls the LETTERCHECK function if the key entry by the
