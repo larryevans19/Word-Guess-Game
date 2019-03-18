@@ -263,7 +263,7 @@ $(document).ready(function () {
             //scoreboard and calls the LETTERCHECK function if the key entry by the
             //player was a LETTER. So the game won't penalize the player if they guess a number or
             //other key like spacebar, backspace, or shift.
-            if ((d.search(letter) === -1 && (event.keyCode > 65 && event.keyCode < 90)) || (d.search(letter) >= (d.length - 2))) {
+            if ((d.search(letter) === -1 && (event.keyCode >= 65 && event.keyCode =< 90)) || (d.search(letter) >= (d.length - 2))) {
                 $("#guessAlert").empty();
                 if (/[a-zA-Z]/i.test(letterStr)) {
                     $("#guessList").append(letter, ", ");
