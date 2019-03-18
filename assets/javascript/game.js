@@ -36,7 +36,7 @@ $(document).ready(function () {
     audioTech.setAttribute("src", "assets/GT.mp3");
 
     var audioRef = document.createElement("audio");
-    audioRef.setAttribute("src", "assets/ref.mp3");
+    audioRef.setAttribute("src", "assets/Ref.mp3");
 
     //GAME FUNCTIONS
 
@@ -220,6 +220,7 @@ $(document).ready(function () {
     //message to the jumbotron.
     function isLetter(event) {
         if (event.keyCode < 65 || event.keyCode > 90) {
+            console.log("isLetter keyCode:", event.keyCode);
             audioRef.play();
             $("#guessAlert").text("YOUR GUESS IS NOT A LETTER! CHOOSE A LETTER NOT SHOWN ABOVE")
         }
@@ -262,7 +263,7 @@ $(document).ready(function () {
             //scoreboard and calls the LETTERCHECK function if the key entry by the
             //player was a LETTER. So the game won't penalize the player if they guess a number or
             //other key like spacebar, backspace, or shift.
-            if ((d.search(letter) === -1) || (d.search(letter) >= (d.length - 2))) {
+            if ((d.search(letter) === -1 && (event.keyCode > 65 && event.keyCode < 90)) || (d.search(letter) >= (d.length - 2))) {
                 $("#guessAlert").empty();
                 if (/[a-zA-Z]/i.test(letterStr)) {
                     $("#guessList").append(letter, ", ");
