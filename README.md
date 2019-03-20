@@ -1,4 +1,4 @@
-# Word-Guess-Game
+# GT GAMEDAY GUESS!
 
 <strong>GT GAMEDAY GUESS!</strong> is an addictive word guess game styled after the classic "Hangman", but with the added pageantry of America's greatest sporting tradition, college football!  Users play as one of the most tradition rich institutions in the history of college football, the <strong> Georgia Tech Yellow Jackets! </strong>  
 
