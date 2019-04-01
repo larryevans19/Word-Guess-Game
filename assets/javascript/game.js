@@ -15,7 +15,8 @@ $(document).ready(function () {
         "Nebraska", "South Florida", "East Carolina", "Cincinnati", "Texas Christian",
         "Texas Tech", "Wisconsin", "Brigham Young", "Fresno State", "UNLV", "Missouri",
         "Washington", "Washington State", "Oregon State", "Indiana", "Illinois",
-        "Minnesota", "Michigan", "Michigan State", "Georgia State"]
+        "Minnesota", "Michigan", "Michigan State", "Georgia State", "Georgia Southern",
+        "Middle Tennessee State", "Western Kentucky"]
 
     //Create global variables needed for the scoreboard and game functions.
     var wins = 0;
@@ -27,7 +28,6 @@ $(document).ready(function () {
     var guessWord = "";
 
     var letterGuess = document.getElementById("guess");
-    var wasGuessed = false;
 
     var audioBoo = document.createElement("audio");
     audioBoo.setAttribute("src", "assets/Boo.mp3")
@@ -52,6 +52,7 @@ $(document).ready(function () {
         // console.log("PREGAME!");
         //Choose a team from the array that will take on Tech
         opponent = teams[Math.floor(Math.random() * teams.length)].toUpperCase();
+        console.log("Random Num:", Math.floor(Math.random() * teams.length))
         // console.log("Opponent", opponent);
 
         //Create a word which converts the opponent name into a string of blanks to serve as the clue.  

@@ -5,11 +5,11 @@
 
 }
 body {
-    color: yellow;
+    color:  rgb(235, 171, 31);
     background-color: black;
     text-align: center;
     font-family: "scoreboard";
-    border: 10px solid yellow
+    border: 10px solid  rgb(235, 171, 31);
 }
 
 #head {
@@ -49,9 +49,9 @@ br {
 
 .scoreboard {
     text-align: center;
-    border: 4px solid yellow;
+    border: 4px solid rgb(235, 171, 31);
     font-family: 'scoreboard';
-    color: yellow;
+    color:  rgb(235, 171, 31);
     background-color: black;
     font-weight: bold;
     height: auto;
